@@ -22,6 +22,12 @@ const getAriaCurrent = (path: string) => (currentPath === path ? 'page' : undefi
         <li class="nav-item">
           <a class={getNavLinkClass('/html')} aria-current={getAriaCurrent('/html')} href="/html">HTML</a>
         </li>
+        <li class="nav-item">
+          <a class={getNavLinkClass('/css')} aria-current={getAriaCurrent('/css')} href="/css">CSS</a>
+        </li>
+        <li class="nav-item">
+          <a class={getNavLinkClass('/backend')} aria-current={getAriaCurrent('/backend')} href="/backend">Back-end</a>
+        </li>
       </ul>
     </div>
   </div>
