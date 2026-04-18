@@ -5,49 +5,118 @@ import Navbar from '../components/navbar.astro';
 
 <Layout title="Página de inicio">
 	<Navbar></Navbar>
-	<main class="title-banner">
-		<h1>Repo de Eddie</h1>
-		<p>Tarea continua de Programación 4.</p>
+	<main id="inicio" class="title-banner container">
+		<h1>Fundamentos Web para Programación 4</h1>
+		<p class="mb-0">Resumen claro y organizado de conceptos clave sobre Internet, la Web y HTML.</p>
 	</main>
 
-	<section class="content">
-		<div class="accordion" id="accordionExample">
+	<section id="internet-web" class="content pb-4">
+		<div class="card bg-dark-subtle border-secondary-subtle mb-3">
+			<div class="card-body">
+				<h2 class="h4 mb-3">1. Fundamentos de Internet y la Web</h2>
+				<p class="mb-0">
+					Internet es una red global de redes conectadas entre sí mediante protocolos estándar.
+					La World Wide Web (WWW) es un servicio que funciona sobre Internet y permite acceder a páginas y recursos mediante navegadores.
+				</p>
+			</div>
+		</div>
+
+		<div class="accordion" id="accordionInternetWeb">
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-					Accordion Item #1
+				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#internetConceptos" aria-expanded="true" aria-controls="internetConceptos">
+					Conceptos base: Internet, Web y su diferencia
 				</button>
 				</h2>
-				<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+				<div id="internetConceptos" class="accordion-collapse collapse show" data-bs-parent="#accordionInternetWeb">
 				<div class="accordion-body">
-					<strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					<ul class="mb-0">
+						<li><strong>Qué es Internet:</strong> infraestructura global que conecta millones de dispositivos.</li>
+						<li><strong>Qué es la World Wide Web:</strong> sistema de documentos y aplicaciones interconectadas por enlaces.</li>
+						<li><strong>Diferencia Internet vs Web:</strong> Internet es la red; la Web es uno de los servicios que usa esa red.</li>
+					</ul>
 				</div>
 				</div>
 			</div>
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					Accordion Item #2
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#internetRed" aria-expanded="false" aria-controls="internetRed">
+					Redes y comunicación
 				</button>
 				</h2>
-				<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				<div id="internetRed" class="accordion-collapse collapse" data-bs-parent="#accordionInternetWeb">
 				<div class="accordion-body">
-					<strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					<ul class="mb-0">
+						<li><strong>Modelo OSI:</strong> referencia de 7 capas para entender cómo viajan los datos en una red.</li>
+						<li><strong>Capas del modelo OSI:</strong> Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación.</li>
+						<li><strong>Dirección IP:</strong> identificador numérico de un dispositivo en una red.</li>
+						<li><strong>DNS:</strong> traduce nombres de dominio (ej. ejemplo.com) a direcciones IP.</li>
+						<li><strong>Servidores y clientes:</strong> el cliente solicita recursos y el servidor los procesa y responde.</li>
+						<li><strong>Navegadores web:</strong> aplicaciones cliente que interpretan HTML, CSS y JavaScript.</li>
+					</ul>
 				</div>
 				</div>
 			</div>
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-					Accordion Item #3
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#internetProtocolos" aria-expanded="false" aria-controls="internetProtocolos">
+					Peticiones web y protocolos
 				</button>
 				</h2>
-				<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+				<div id="internetProtocolos" class="accordion-collapse collapse" data-bs-parent="#accordionInternetWeb">
 				<div class="accordion-body">
-					<strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+					<ul class="mb-0">
+						<li><strong>Funcionamiento de una petición web:</strong> el navegador consulta DNS, contacta servidor, envía solicitud y recibe respuesta.</li>
+						<li><strong>HTTP:</strong> protocolo de transferencia de hipertexto, base de comunicación web.</li>
+						<li><strong>HTTPS:</strong> versión segura de HTTP que cifra la comunicación.</li>
+						<li><strong>Diferencia HTTP y HTTPS:</strong> HTTPS agrega cifrado y autenticación, HTTP no.</li>
+						<li><strong>SSL y TLS:</strong> protocolos criptográficos; TLS es la evolución moderna de SSL.</li>
+						<li><strong>Métodos HTTP:</strong> GET (consultar), POST (crear), PUT (actualizar), DELETE (eliminar).</li>
+						<li><strong>Códigos de estado HTTP:</strong> 2xx éxito, 3xx redirección, 4xx error cliente, 5xx error servidor.</li>
+					</ul>
 				</div>
 				</div>
 			</div>
 			</div>
+	</section>
+
+	<section id="html" class="content pb-5">
+		<div class="card bg-dark-subtle border-secondary-subtle">
+			<div class="card-body">
+				<h2 class="h4 mb-3">2. HTML</h2>
+				<p>
+					<strong>Qué es HTML:</strong> lenguaje de marcado que estructura el contenido de una página web.
+					Define títulos, párrafos, enlaces, imágenes, formularios y más.
+				</p>
+				<h3 class="h5 mt-4">Estructura básica de un documento HTML</h3>
+				<ul>
+					<li><strong>&lt;!DOCTYPE html&gt;</strong>: declara que el documento usa HTML5.</li>
+					<li><strong>&lt;html&gt;</strong>: elemento raíz del documento.</li>
+					<li><strong>&lt;head&gt;</strong>: metadatos, título y enlaces a recursos.</li>
+					<li><strong>&lt;body&gt;</strong>: contenido visible de la página.</li>
+				</ul>
+				<h3 class="h5 mt-4">Etiquetas principales</h3>
+				<div class="row g-3">
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h4 class="h6">Estructura</h4>
+							<p class="mb-0">&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;footer&gt;</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h4 class="h6">Contenido</h4>
+							<p class="mb-0">&lt;h1&gt;...&lt;h6&gt;, &lt;p&gt;, &lt;a&gt;, &lt;img&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h4 class="h6">Formularios</h4>
+							<p class="mb-0">&lt;form&gt;, &lt;input&gt;, &lt;label&gt;, &lt;select&gt;, &lt;button&gt;, &lt;textarea&gt;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 </Layout>
