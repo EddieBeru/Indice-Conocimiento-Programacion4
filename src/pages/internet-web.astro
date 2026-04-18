@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
+---
+
+<Layout title="Fundamentos de Internet y la Web">
+	<Navbar></Navbar>
+	<main class="title-banner">
+		<h1>Fundamentos de Internet y la Web</h1>
+		<p class="mb-0">Conceptos esenciales para comprender cómo funciona la comunicación web.</p>
+	</main>
+
+	<section class="content pb-5">
+		<div class="card bg-dark-subtle border-secondary-subtle mb-3">
+			<div class="card-body">
+				<p class="mb-0">
+					Internet es una red global de redes conectadas entre sí mediante protocolos estándar.
+					La World Wide Web (WWW) es un servicio que funciona sobre Internet y permite acceder a páginas y recursos mediante navegadores.
+				</p>
+			</div>
+		</div>
+
+		<div class="accordion" id="accordionInternetWeb">
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#internetConceptos" aria-expanded="true" aria-controls="internetConceptos">
+						Conceptos base: Internet, Web y su diferencia
+					</button>
+				</h2>
+				<div id="internetConceptos" class="accordion-collapse collapse show" data-bs-parent="#accordionInternetWeb">
+					<div class="accordion-body">
+						<ul class="mb-0">
+							<li><strong>Qué es Internet:</strong> infraestructura global que conecta millones de dispositivos.</li>
+							<li><strong>Qué es la World Wide Web:</strong> sistema de documentos y aplicaciones interconectadas por enlaces.</li>
+							<li><strong>Diferencia Internet vs Web:</strong> Internet es la red; la Web es uno de los servicios que usa esa red.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#internetRed" aria-expanded="false" aria-controls="internetRed">
+						Redes y comunicación
+					</button>
+				</h2>
+				<div id="internetRed" class="accordion-collapse collapse" data-bs-parent="#accordionInternetWeb">
+					<div class="accordion-body">
+						<ul class="mb-0">
+							<li><strong>Modelo OSI:</strong> referencia de 7 capas para entender cómo viajan los datos en una red.</li>
+							<li><strong>Capas del modelo OSI:</strong> Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación.</li>
+							<li><strong>Dirección IP:</strong> identificador numérico de un dispositivo en una red.</li>
+							<li><strong>DNS (Domain Name System):</strong> traduce nombres de dominio (ej. ejemplo.com) a direcciones IP.</li>
+							<li><strong>Servidores y clientes:</strong> el cliente solicita recursos y el servidor los procesa y responde.</li>
+							<li><strong>Navegadores web:</strong> aplicaciones cliente que interpretan HTML, CSS y JavaScript.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#internetProtocolos" aria-expanded="false" aria-controls="internetProtocolos">
+						Peticiones web y protocolos
+					</button>
+				</h2>
+				<div id="internetProtocolos" class="accordion-collapse collapse" data-bs-parent="#accordionInternetWeb">
+					<div class="accordion-body">
+						<ul class="mb-0">
+							<li><strong>Funcionamiento de una petición web:</strong> navegador → DNS → servidor → respuesta.</li>
+							<li><strong>Protocolo HTTP:</strong> protocolo de transferencia de hipertexto para comunicación web.</li>
+							<li><strong>Protocolo HTTPS:</strong> versión segura de HTTP con cifrado.</li>
+							<li><strong>Diferencia HTTP y HTTPS:</strong> HTTPS agrega confidencialidad, integridad y autenticación.</li>
+							<li><strong>SSL y TLS:</strong> protocolos criptográficos; TLS es la evolución moderna de SSL.</li>
+							<li><strong>Métodos HTTP:</strong> GET (consultar), POST (crear), PUT (actualizar), DELETE (eliminar).</li>
+							<li><strong>Códigos de estado HTTP:</strong> 2xx éxito, 3xx redirección, 4xx error cliente, 5xx error servidor.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

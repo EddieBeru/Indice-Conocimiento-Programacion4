@@ -1,6 +1,10 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle">
   <div class="container">
-    <a class="navbar-brand fw-semibold" href="#">Programación 4</a>
+    <a class="navbar-brand fw-semibold" href="/">Programación 4</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,13 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+          <a class={`nav-link ${currentPath === '/' ? 'active' : ''}`} aria-current={currentPath === '/' ? 'page' : undefined} href="/">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#internet-web">Internet y Web</a>
+          <a class={`nav-link ${currentPath === '/internet-web' ? 'active' : ''}`} aria-current={currentPath === '/internet-web' ? 'page' : undefined} href="/internet-web">Internet y Web</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#html">HTML</a>
+          <a class={`nav-link ${currentPath === '/html' ? 'active' : ''}`} aria-current={currentPath === '/html' ? 'page' : undefined} href="/html">HTML</a>
         </li>
       </ul>
     </div>
