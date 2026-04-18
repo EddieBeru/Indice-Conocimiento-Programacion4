@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
+---
+
+<Layout title="HTML">
+	<Navbar></Navbar>
+	<main class="title-banner">
+		<h1>HTML</h1>
+		<p class="mb-0">Lenguaje base para estructurar correctamente el contenido web.</p>
+	</main>
+
+	<section class="content pb-5">
+		<div class="card bg-dark-subtle border-secondary-subtle mb-3">
+			<div class="card-body">
+				<h2 class="h4 mb-3">Qué es HTML</h2>
+				<p class="mb-0">
+					HTML (HyperText Markup Language) es el lenguaje de marcado que define la estructura
+					de una página web: títulos, párrafos, enlaces, imágenes, listas, formularios y más.
+				</p>
+			</div>
+		</div>
+
+		<div class="card bg-dark-subtle border-secondary-subtle mb-3">
+			<div class="card-body">
+				<h2 class="h4 mb-3">Estructura básica de un documento HTML</h2>
+				<ul class="mb-0">
+					<li><strong>&lt;!DOCTYPE html&gt;</strong>: indica que el documento usa HTML5.</li>
+					<li><strong>&lt;html&gt;</strong>: contenedor raíz de todo el documento.</li>
+					<li><strong>&lt;head&gt;</strong>: contiene metadatos, título y enlaces a recursos externos.</li>
+					<li><strong>&lt;body&gt;</strong>: contiene el contenido visible de la página.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card bg-dark-subtle border-secondary-subtle">
+			<div class="card-body">
+				<h2 class="h4 mb-3">Etiquetas principales</h2>
+				<div class="row g-3">
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h3 class="h6">Estructura</h3>
+							<p class="mb-0">&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;aside&gt;, &lt;footer&gt;</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h3 class="h6">Contenido</h3>
+							<p class="mb-0">&lt;h1&gt;...&lt;h6&gt;, &lt;p&gt;, &lt;a&gt;, &lt;img&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;, &lt;table&gt;, &lt;div&gt;, &lt;span&gt;</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="p-3 border rounded bg-body-tertiary h-100">
+							<h3 class="h6">Formularios</h3>
+							<p class="mb-0">&lt;form&gt;, &lt;input&gt;, &lt;label&gt;, &lt;select&gt;, &lt;option&gt;, &lt;button&gt;, &lt;textarea&gt;</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

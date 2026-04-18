@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
+---
+
+<Layout title="Elementos del Back-end">
+	<Navbar></Navbar>
+	<main class="title-banner">
+		<h1>Elementos del Back-end</h1>
+		<p class="mb-0">Conceptos esenciales del lado del servidor y fundamentos en Spring Boot.</p>
+	</main>
+
+	<section class="content pb-5">
+		<div class="accordion" id="accordionBackend">
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#backendFundamentos" aria-expanded="true" aria-controls="backendFundamentos">
+						Fundamentos de comunicación web
+					</button>
+				</h2>
+				<div id="backendFundamentos" class="accordion-collapse collapse show" data-bs-parent="#accordionBackend">
+					<div class="accordion-body">
+						<ul class="mb-0">
+							<li><strong>Cliente vs Servidor:</strong> el cliente solicita recursos y el servidor responde con datos o páginas.</li>
+							<li><strong>HTTP Request:</strong> solicitud enviada por el cliente al servidor (ruta, método, headers, body).</li>
+							<li><strong>HTTP Response:</strong> respuesta enviada por el servidor (estado, headers y contenido).</li>
+							<li><strong>Métodos GET/POST:</strong> GET consulta información; POST envía datos para crear/procesar recursos.</li>
+							<li><strong>Cookies:</strong> datos pequeños almacenados en el navegador para identificar o recordar estado.</li>
+							<li><strong>Sesiones:</strong> mecanismo del servidor para mantener estado entre múltiples peticiones de un usuario.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#backendSpring" aria-expanded="false" aria-controls="backendSpring">
+						Spring Boot y estructura base
+					</button>
+				</h2>
+				<div id="backendSpring" class="accordion-collapse collapse" data-bs-parent="#accordionBackend">
+					<div class="accordion-body">
+						<ul class="mb-0">
+							<li><strong>Spring Boot:</strong> framework para crear aplicaciones Java back-end de forma rápida con configuración automática.</li>
+							<li><strong>Inyección de dependencias (@Autowired):</strong> permite que Spring gestione y provea objetos automáticamente.</li>
+							<li><strong>@Controller:</strong> define controladores orientados a vistas (por ejemplo, renderizando plantillas).</li>
+							<li><strong>@RestController:</strong> define controladores para APIs REST que responden datos (JSON, texto, etc.).</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#backendThymeleaf" aria-expanded="false" aria-controls="backendThymeleaf">
+						Uso de Thymeleaf
+					</button>
+				</h2>
+				<div id="backendThymeleaf" class="accordion-collapse collapse" data-bs-parent="#accordionBackend">
+					<div class="accordion-body">
+						<p>
+							<strong>Thymeleaf</strong> es un motor de plantillas para generar HTML dinámico desde Spring.
+							En clase/aula virtual se pueden tomar ejemplos para cada punto: mostrar variables,
+							recorrer listas, condicionales y formularios enlazados al back-end.
+						</p>
+						<ul class="mb-0">
+							<li>Renderizar una vista con datos del controlador.</li>
+							<li>Iterar colecciones en una tabla/lista.</li>
+							<li>Mostrar bloques condicionales según estado.</li>
+							<li>Enviar formularios con métodos GET/POST.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
