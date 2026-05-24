@@ -1,0 +1,299 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/navbar.astro";
+---
+
+<Layout title="Pac-Man (DOM Version)">
+    <!-- Cargar fuente arcade directamente en HTML para compatibilidad absoluta de compilación -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+        rel="stylesheet"
+    />
+
+    <div class="d-flex flex-column flex-grow-1">
+        <Navbar />
+        <div
+            class="d-flex justify-content-center align-items-center flex-grow-1 my-3"
+        >
+            <div id="game-wrapper" class="dom-version">
+                <div id="game-banner">
+                    <span>SCORE</span>
+                    <span id="game-score">0</span>
+                </div>
+
+                <div id="game-board" class="blurred">
+                    <!-- El tablero se rellenará dinámicamente con divs de paredes, monedas y entidades -->
+                </div>
+
+                <div id="game-overlay">
+                    <h2 id="overlay-title">READY?</h2>
+                    <button id="play-button">START</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        * {
+            font-family: "Press Start 2P", monospace !important;
+        }
+    </style>
+    <style is:global>
+        #game-wrapper.dom-version {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #game-banner {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: #050505;
+            color: #fff;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #222;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        #game-score {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- Tablero y Efecto CRT/Scanlines --- */
+        #game-board {
+            position: relative;
+            width: 432px; /* 27 cols * 16px */
+            height: 496px; /* 31 rows * 16px */
+            background: #020202;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #game-board.blurred {
+            filter: blur(4px) brightness(0.4);
+        }
+
+        /* --- Paredes de laberinto (Paredes de DOM en cuadrícula 3x3) --- */
+        .tile-wall {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: #ffffff; /* Borde exterior blanco */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            box-sizing: border-box;
+        }
+
+        .sub-tile {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sub-tile.blue {
+            background: #001eff; /* Relleno interior azul */
+            box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Entidades del Juego --- */
+        .entity {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            z-index: 10;
+            will-change: transform;
+        }
+
+        .sprite {
+            width: 16px;
+            height: 16px;
+            background-repeat: no-repeat;
+            background-size: 128px 16px;
+        }
+
+        /* --- Monedas / Pellets --- */
+        .coin {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coin .sprite {
+            width: 16px;
+            height: 16px;
+            background-image: url("./img/sprites/Coin.png");
+        }
+
+        .coin-big {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .coin-big .sprite {
+            width: 16px;
+            height: 16px;
+            background-image: url("./img/sprites/BigCoin.png");
+        }
+
+        /* --- Pacman --- */
+        .pacman {
+            z-index: 12;
+        }
+
+        .pacman .sprite {
+            background-image: url("./img/sprites/PacMan.png");
+            transition: transform 0.05s linear;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+        }
+
+        /* Animación de muerte en DOM (Giro, encogimiento y destello de color) */
+        .pacman .sprite.dying {
+            animation: pacman-death 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes pacman-death {
+            0% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 6px #ffd700) hue-rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.4);
+                filter: drop-shadow(0 0 15px #ff0055) hue-rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) rotate(180deg);
+                filter: drop-shadow(0 0 0px #ff0000) hue-rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .ghost {
+            z-index: 10;
+        }
+
+        .ghost-red .sprite {
+            background-image: url("./img/sprites/redGhost.png");
+            filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+        }
+
+        .ghost-blue .sprite {
+            background-image: url("./img/sprites/blueGhost.png");
+            filter: drop-shadow(0 0 5px rgba(0, 180, 255, 0.7));
+        }
+
+        .ghost-yellow .sprite {
+            background-image: url("./img/sprites/yellowGhost.png");
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+        }
+
+        .ghost-orange .sprite {
+            background-image: url("./img/sprites/orangeGhost.png");
+            filter: drop-shadow(0 0 5px rgba(255, 127, 0, 0.7));
+        }
+
+        /* Fantasma asustado (Power pellet activo) */
+        .ghost.scared .sprite {
+            background-image: url("./img/sprites/greenGhost.png") !important;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 100, 0.8)) !important;
+        }
+
+        /* Fantasma muerto (Solo ojos retornando) */
+        .ghost.dead {
+            opacity: 0.35;
+            filter: grayscale(100%) brightness(1.5) !important;
+            z-index: 7;
+        }
+
+        .ghost.dead .sprite {
+            filter: none !important;
+        }
+
+        /* --- Estilos del Overlay --- */
+        #game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        #game-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #overlay-title {
+            color: #ffd700;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        #play-button {
+            background: #ffd700;
+            color: #000;
+            border: 4px solid #fff;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b39700, 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.1s ease;
+            outline: none;
+        }
+
+        #play-button:hover {
+            background: #ffe34d;
+            box-shadow: 0 4px 0 #b39700, 0 8px 15px rgba(0, 0, 0, 0.4);
+            transform: translateY(2px);
+        }
+
+        #play-button:active {
+            box-shadow: 0 0px 0 #b39700, 0 4px 5px rgba(0, 0, 0, 0.4);
+            transform: translateY(6px);
+        }
+    </style>
+
+    <script is:inline src="/game-dom/bundle.js"></script>
+</Layout>

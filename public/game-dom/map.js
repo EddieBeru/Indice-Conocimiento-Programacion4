@@ -1,11 +1,5 @@
-import { ctx, COLS, ROWS } from "./main.js";
-import { drawTile, drawSprite, drawSubTile } from "./engine.js";
+import { COLS, ROWS } from "./main.js";
 import Coin from "./entities/coin.js";
-
-const spritesheetTile = 16; // Tamaño de cada tile en la spritesheet
-const spritesheet = new Image();
-spritesheet.src = "./img/sprites/Tileset.png";
-spritesheet.onerror = () => console.error("Spritesheet de tiles no se pudo cargar.");
 
 const MAP_DATA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
@@ -41,33 +35,49 @@ const MAP_DATA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 30
 ];
 
+
 export let coins = [];
 
 export class Map {
-    constructor() {
-        this.grid = MAP_DATA.map(row => [...row]); // deep copy so the original stays clean
+    constructor(boardEl) {
+        this.boardEl = boardEl;
+        this.grid = MAP_DATA.map(row => [...row]);
+        this.inicializarDOM();
+
+
     }
 
-    dibujar() {
-        if (this.grid.length === 0) return;
+    inicializarDOM() {
         coins = [];
-
         for (let row = 0; row < ROWS; row++) {
             for (let col = 0; col < COLS; col++) {
-                if (this.grid[row][col] === 1) {
-                    drawTile(col, row, "white");
+                const type = this.grid[row][col];
+                if (type === 1) {
+                    // Crear elemento de pared
+                    const wallEl = document.createElement("div");
+                    wallEl.className = "tile-wall";
+                    wallEl.style.left = `${col * 16}px`;
+                    wallEl.style.top = `${row * 16}px`;
 
-                    this.getTileNeighbors(col, row).split(",").forEach((neighbor, index) => {
+                    // Crear sub-tiles 3x3 para emular el spritesheet del original
+                    const neighbors = this.getTileNeighbors(col, row).split(",");
+                    neighbors.forEach((neighbor, index) => {
+                        const subTile = document.createElement("div");
+                        subTile.className = "sub-tile";
                         if (neighbor === "1") {
-                            const dx = (index % 3); // 0 - 2
-                            const dy = Math.floor(index / 3); // 0, 1, or 2
-                            drawSubTile(col, row, "blue", dx, dy);
+                            subTile.classList.add("blue");
                         }
+                        wallEl.appendChild(subTile);
                     });
-                } else if (this.grid[row][col] === 2) {
-                    coins.push(new Coin(col, row, false));
-                } else if (this.grid[row][col] === 3) {
-                    coins.push(new Coin(col, row, true));
+                    this.boardEl.appendChild(wallEl);
+                } else if (type === 2) {
+                    const coin = new Coin(col, row, false);
+                    coins.push(coin);
+                    this.boardEl.appendChild(coin.element);
+                } else if (type === 3) {
+                    const coin = new Coin(col, row, true);
+                    coins.push(coin);
+                    this.boardEl.appendChild(coin.element);
                 }
             }
         }
@@ -94,7 +104,7 @@ export class Map {
     }
 
     isWalkable(col, row) {
-        //TUnel
+        // Tunel
         if (col === 0 && row === 13) {
             return true;
         } else if (col === 26 && row === 13) {
@@ -176,7 +186,13 @@ export class Map {
 
     removeCoin(x, y) {
         this.grid[y][x] = 0;
+        const coinIndex = coins.findIndex(coin => coin.x === x && coin.y === y);
+        if (coinIndex !== -1) {
+            const coin = coins[coinIndex];
+            if (coin.element) {
+                coin.element.remove();
+            }
+            coins.splice(coinIndex, 1);
+        }
     }
 }
-
-

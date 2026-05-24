@@ -30,11 +30,26 @@ import Navbar from '../components/navbar.astro';
 				</h2>
 				<div id="cssAplicacion" class="accordion-collapse collapse show" data-bs-parent="#accordionCss">
 					<div class="accordion-body">
-						<ul class="mb-0">
-							<li><strong>CSS en línea:</strong> se aplica directamente en el atributo <code>style</code> de una etiqueta.</li>
-							<li><strong>CSS interno:</strong> se escribe dentro de una etiqueta <code>&lt;style&gt;</code> en el documento HTML.</li>
-							<li><strong>CSS externo:</strong> se guarda en un archivo <code>.css</code> separado y se enlaza con <code>&lt;link&gt;</code>.</li>
-						</ul>
+						<div class="row g-3">
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">CSS en línea</h3>
+									<p class="mb-0">Se aplica directamente en el atributo <code>style</code> de una etiqueta.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">CSS interno</h3>
+									<p class="mb-0">Se escribe dentro de una etiqueta <code>&lt;style&gt;</code> en el documento HTML.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">CSS externo</h3>
+									<p class="mb-0">Se guarda en un archivo <code>.css</code> separado y se enlaza con <code>&lt;link&gt;</code>.</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -47,14 +62,44 @@ import Navbar from '../components/navbar.astro';
 				</h2>
 				<div id="cssSelectores" class="accordion-collapse collapse" data-bs-parent="#accordionCss">
 					<div class="accordion-body">
-						<ul class="mb-0">
-							<li><strong>Selector por etiqueta:</strong> selecciona elementos por su nombre (ej. <code>p</code>, <code>h1</code>).</li>
-							<li><strong>Selector por clase:</strong> selecciona elementos con una clase específica (ej. <code>.card</code>).</li>
-							<li><strong>Selector por id:</strong> selecciona un elemento único por su id (ej. <code>#menu</code>).</li>
-							<li><strong>Selectores descendentes:</strong> seleccionan elementos dentro de otros (ej. <code>nav a</code>).</li>
-							<li><strong>Pseudo-clases:</strong> estados especiales (ej. <code>:hover</code>, <code>:focus</code>, <code>:first-child</code>).</li>
-							<li><strong>Pseudo-elementos:</strong> partes específicas (ej. <code>::before</code>, <code>::after</code>, <code>::first-letter</code>).</li>
-						</ul>
+						<div class="row g-3">
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Selector por etiqueta</h3>
+									<p class="mb-0">Selecciona elementos por su nombre (ej. <code>p</code>, <code>h1</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Selector por clase</h3>
+									<p class="mb-0">Selecciona elementos con una clase específica (ej. <code>.card</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Selector por id</h3>
+									<p class="mb-0">Selecciona un elemento único por su id (ej. <code>#menu</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Selectores descendentes</h3>
+									<p class="mb-0">Seleccionan elementos dentro de otros (ej. <code>nav a</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Pseudo-clases</h3>
+									<p class="mb-0">Estados especiales (ej. <code>:hover</code>, <code>:focus</code>, <code>:first-child</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Pseudo-elementos</h3>
+									<p class="mb-0">Partes específicas (ej. <code>::before</code>, <code>::after</code>, <code>::first-letter</code>).</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -67,23 +112,88 @@ import Navbar from '../components/navbar.astro';
 				</h2>
 				<div id="cssPropiedades" class="accordion-collapse collapse" data-bs-parent="#accordionCss">
 					<div class="accordion-body">
-						<ul>
-							<li><strong>color:</strong> color del texto.</li>
-							<li><strong>background:</strong> color o imagen de fondo.</li>
-							<li><strong>font-family:</strong> tipografía.</li>
-							<li><strong>font-size:</strong> tamaño del texto.</li>
-							<li><strong>margin:</strong> espacio externo del elemento.</li>
-							<li><strong>padding:</strong> espacio interno del elemento.</li>
-							<li><strong>border:</strong> borde del elemento.</li>
-							<li><strong>width / height:</strong> ancho y alto.</li>
-						</ul>
-						<ul class="mb-0">
-							<li><strong>Modelo de caja (Box Model):</strong> contenido + padding + borde + margen.</li>
-							<li><strong>Display:</strong> define el tipo de caja visual (ej. <code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>none</code>).</li>
-							<li><strong>Position:</strong> controla posicionamiento (<code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>).</li>
-							<li><strong>Flexbox (introducción):</strong> sistema de layout unidimensional para alinear y distribuir elementos.</li>
-							<li><strong>Buenas prácticas:</strong> usar CSS externo, nombres de clases claros, reutilizar estilos y mantener consistencia visual.</li>
-						</ul>
+						<div class="row g-3 mb-3">
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">color</h3>
+									<p class="mb-0">Color del texto.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">background</h3>
+									<p class="mb-0">Color o imagen de fondo.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">font-family</h3>
+									<p class="mb-0">Tipografía.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">font-size</h3>
+									<p class="mb-0">Tamaño del texto.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">margin</h3>
+									<p class="mb-0">Espacio externo del elemento.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">padding</h3>
+									<p class="mb-0">Espacio interno del elemento.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">border</h3>
+									<p class="mb-0">Borde del elemento.</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">width / height</h3>
+									<p class="mb-0">Ancho y alto.</p>
+								</div>
+							</div>
+						</div>
+						<div class="row g-3">
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Modelo de caja (Box Model)</h3>
+									<p class="mb-0">Contenido + padding + borde + margen.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Display</h3>
+									<p class="mb-0">Define el tipo de caja visual (ej. <code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>none</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Position</h3>
+									<p class="mb-0">Controla posicionamiento (<code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>).</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Flexbox (introducción)</h3>
+									<p class="mb-0">Sistema de layout unidimensional para alinear y distribuir elementos.</p>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Buenas prácticas</h3>
+									<p class="mb-0">Usar CSS externo, nombres de clases claros, reutilizar estilos y mantener consistencia visual.</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

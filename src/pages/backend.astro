@@ -1,74 +1,178 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/navbar.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/navbar.astro";
 ---
 
-<Layout title="Elementos del Back-end">
-	<Navbar></Navbar>
+<Layout title="Elementos del Backend">
+	<Navbar />
 	<main class="title-banner">
-		<h1>Elementos del Back-end</h1>
-		<p class="mb-0">Conceptos esenciales del lado del servidor y fundamentos en Spring Boot.</p>
+		<h1>Elementos del Backend</h1>
+		<p class="mb-0">
+			Conceptos esenciales del lado del servidor y fundamentos en Spring
+			Boot.
+		</p>
 	</main>
 
 	<section class="content pb-5">
 		<div class="accordion" id="accordionBackend">
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#backendFundamentos" aria-expanded="true" aria-controls="backendFundamentos">
+					<button
+						class="accordion-button"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#backendFundamentos"
+						aria-expanded="true"
+						aria-controls="backendFundamentos"
+					>
 						Fundamentos de comunicación web
 					</button>
 				</h2>
-				<div id="backendFundamentos" class="accordion-collapse collapse show" data-bs-parent="#accordionBackend">
+				<div
+					id="backendFundamentos"
+					class="accordion-collapse collapse show"
+					data-bs-parent="#accordionBackend"
+				>
 					<div class="accordion-body">
-						<ul class="mb-0">
-							<li><strong>Cliente vs Servidor:</strong> el cliente solicita recursos y el servidor responde con datos o páginas.</li>
-							<li><strong>HTTP Request:</strong> solicitud enviada por el cliente al servidor (ruta, método, headers, body).</li>
-							<li><strong>HTTP Response:</strong> respuesta enviada por el servidor (estado, headers y contenido).</li>
-							<li><strong>Métodos GET/POST:</strong> GET consulta información; POST envía datos para crear/procesar recursos.</li>
-							<li><strong>Cookies:</strong> datos pequeños almacenados en el navegador para identificar o recordar estado.</li>
-							<li><strong>Sesiones:</strong> mecanismo del servidor para mantener estado entre múltiples peticiones de un usuario.</li>
-						</ul>
+						<div class="row g-3">
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Cliente vs Servidor</h3>
+									<p class="mb-0">El cliente solicita recursos y el servidor responde con datos o páginas.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">HTTP Request</h3>
+									<p class="mb-0">Solicitud enviada por el cliente al servidor (ruta, método, headers, body).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">HTTP Response</h3>
+									<p class="mb-0">Respuesta enviada por el servidor (estado, headers y contenido).</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Métodos GET/POST</h3>
+									<p class="mb-0">GET consulta información; POST envía datos para crear/procesar recursos.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Cookies</h3>
+									<p class="mb-0">Datos pequeños almacenados en el navegador para identificar o recordar estado.</p>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Sesiones</h3>
+									<p class="mb-0">Mecanismo del servidor para mantener estado entre múltiples peticiones de un usuario.</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#backendSpring" aria-expanded="false" aria-controls="backendSpring">
+					<button
+						class="accordion-button collapsed"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#backendSpring"
+						aria-expanded="false"
+						aria-controls="backendSpring"
+					>
 						Spring Boot y estructura base
 					</button>
 				</h2>
-				<div id="backendSpring" class="accordion-collapse collapse" data-bs-parent="#accordionBackend">
+				<div
+					id="backendSpring"
+					class="accordion-collapse collapse"
+					data-bs-parent="#accordionBackend"
+				>
 					<div class="accordion-body">
-						<ul class="mb-0">
-							<li><strong>Spring Boot:</strong> framework para crear aplicaciones Java back-end de forma rápida con configuración automática.</li>
-							<li><strong>Inyección de dependencias (@Autowired):</strong> permite que Spring gestione y provea objetos automáticamente.</li>
-							<li><strong>@Controller:</strong> define controladores orientados a vistas (por ejemplo, renderizando plantillas).</li>
-							<li><strong>@RestController:</strong> define controladores para APIs REST que responden datos (JSON, texto, etc.).</li>
-						</ul>
+						<div class="row g-3">
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Spring Boot</h3>
+									<p class="mb-0">Framework para crear aplicaciones Java backend de forma rápida con configuración automática.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">Inyección de dependencias (@Autowired)</h3>
+									<p class="mb-0">Permite que Spring gestione y provea objetos automáticamente.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">@Controller</h3>
+									<p class="mb-0">Define controladores orientados a vistas (por ejemplo, renderizando plantillas).</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<h3 class="h6">@RestController</h3>
+									<p class="mb-0">Define controladores para APIs REST que responden datos (JSON, texto, etc.).</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="accordion-item">
 				<h2 class="accordion-header">
-					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#backendThymeleaf" aria-expanded="false" aria-controls="backendThymeleaf">
+					<button
+						class="accordion-button collapsed"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#backendThymeleaf"
+						aria-expanded="false"
+						aria-controls="backendThymeleaf"
+					>
 						Uso de Thymeleaf
 					</button>
 				</h2>
-				<div id="backendThymeleaf" class="accordion-collapse collapse" data-bs-parent="#accordionBackend">
+				<div
+					id="backendThymeleaf"
+					class="accordion-collapse collapse"
+					data-bs-parent="#accordionBackend"
+				>
 					<div class="accordion-body">
 						<p>
-							<strong>Thymeleaf</strong> es un motor de plantillas para generar HTML dinámico desde Spring.
-							En clase/aula virtual se pueden tomar ejemplos para cada punto: mostrar variables,
-							recorrer listas, condicionales y formularios enlazados al back-end.
+							<strong>Thymeleaf</strong> es un motor de plantillas
+							para generar HTML dinámico desde Spring. En clase/aula
+							virtual se pueden tomar ejemplos para cada punto: mostrar
+							variables, recorrer listas, condicionales y formularios
+							enlazados al backend.
 						</p>
-						<ul class="mb-0">
-							<li>Renderizar una vista con datos del controlador.</li>
-							<li>Iterar colecciones en una tabla/lista.</li>
-							<li>Mostrar bloques condicionales según estado.</li>
-							<li>Enviar formularios con métodos GET/POST.</li>
-						</ul>
+						<div class="row g-3 mt-2">
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<p class="mb-0">Renderizar una vista con datos del controlador.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<p class="mb-0">Iterar colecciones en una tabla/lista.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<p class="mb-0">Mostrar bloques condicionales según estado.</p>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="p-3 border rounded bg-body-tertiary h-100">
+									<p class="mb-0">Enviar formularios con métodos GET/POST.</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

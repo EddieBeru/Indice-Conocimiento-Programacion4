@@ -1,32 +1,90 @@
 ---
 const currentPath = Astro.url.pathname;
-const getNavLinkClass = (path: string) => `nav-link ${currentPath === path ? 'active' : ''}`;
-const getAriaCurrent = (path: string) => (currentPath === path ? 'page' : undefined);
+const getNavLinkClass = (path: string) =>
+  `nav-link ${currentPath === path ? "active" : ""}`;
+const getAriaCurrent = (path: string) =>
+  currentPath === path ? "page" : undefined;
 ---
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle">
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle"
+>
   <div class="container">
-    <a class="navbar-brand fw-semibold" href="/">Programación 4</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand fw-semibold" href="/index.html">Programación 4</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarMain"
+      aria-controls="navbarMain"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class={getNavLinkClass('/')} aria-current={getAriaCurrent('/')} href="/">Inicio</a>
+          <a
+            class={getNavLinkClass("/index.html")}
+            aria-current={getAriaCurrent("/index.html")}
+            href="/index.html">Inicio</a
+          >
         </li>
         <li class="nav-item">
-          <a class={getNavLinkClass('/internet-web')} aria-current={getAriaCurrent('/internet-web')} href="/internet-web">Internet y Web</a>
+          <a
+            class={getNavLinkClass("/internet-web.html")}
+            aria-current={getAriaCurrent("/internet-web.html")}
+            href="/internet-web.html">Internet y Web</a
+          >
         </li>
         <li class="nav-item">
-          <a class={getNavLinkClass('/html')} aria-current={getAriaCurrent('/html')} href="/html">HTML</a>
+          <a
+            class={getNavLinkClass("/html.html")}
+            aria-current={getAriaCurrent("/html.html")}
+            href="/html.html">HTML</a
+          >
         </li>
         <li class="nav-item">
-          <a class={getNavLinkClass('/css')} aria-current={getAriaCurrent('/css')} href="/css">CSS</a>
+          <a
+            class={getNavLinkClass("/css.html")}
+            aria-current={getAriaCurrent("/css.html")}
+            href="/css.html">CSS</a
+          >
         </li>
         <li class="nav-item">
-          <a class={getNavLinkClass('/backend')} aria-current={getAriaCurrent('/backend')} href="/backend">Back-end</a>
+          <a
+            class={getNavLinkClass("/backend.html")}
+            aria-current={getAriaCurrent("/backend.html")}
+            href="/backend.html">Backend</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class={getNavLinkClass("/js.html")}
+            aria-current={getAriaCurrent("/js.html")}
+            href="/js.html">JavaScript</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Pac-Man
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-dark animate slideIn"
+            aria-labelledby="navbarDropdown"
+          >
+            <li><a class="dropdown-item" href="/game.html">Canvas Clásico</a></li>
+            <li><a class="dropdown-item" href="/game-dom.html">DOM Puro</a></li>
+          </ul>
         </li>
       </ul>
     </div>

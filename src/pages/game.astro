@@ -13,6 +13,15 @@ import Navbar from "../components/navbar.astro";
     <div class="d-flex flex-column flex-grow-1">
         <Navbar />
 
+        <p style="font-size: small; text-align: center;">
+            Cando leí el enunciado, ignoré la parte donde decía que el Pacman
+            debía ser con manipulación del DOM. Entonces lo hice con el tag <code
+                >canvas</code
+            > porque se me hizo obvio. Sin embargo, cuando me di cuenta, me dió pena
+            borrar todo mi código entonces aquí está. <a href="/game-dom.html"
+                >Visita la otra versión acá.</a
+            >
+        </p>
         <div
             class="d-flex justify-content-center align-items-center flex-grow-1 my-3"
         >
@@ -36,7 +45,7 @@ import Navbar from "../components/navbar.astro";
 
     <style>
         * {
-            font-family: "Press Start 2P", monospace;
+            font-family: "Press Start 2P", monospace !important;
         }
         #game-wrapper {
             display: flex;
@@ -47,6 +56,29 @@ import Navbar from "../components/navbar.astro";
             border-radius: 8px;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
             background: #111;
+            border-radius: 12px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8),
+                0 0 25px rgba(0, 80, 255, 0.3);
+            border: 4px solid #333;
+        }
+
+        /* Scanlines y curva de pantalla de tubo retro */
+        #game-wrapper::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.2) 50%
+            );
+            background-size: 100% 4px;
+            z-index: 20;
+            pointer-events: none;
+            opacity: 0.85;
         }
 
         #game-banner {
@@ -140,5 +172,5 @@ import Navbar from "../components/navbar.astro";
         }
     </style>
 
-    <script type="module" is:inline src="/game/main.js"></script>
+    <script is:inline src="/game/bundle.js"></script>
 </Layout>

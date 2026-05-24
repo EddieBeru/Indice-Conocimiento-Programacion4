@@ -11,9 +11,9 @@ export default class Coin extends Entity {
         this.spritesheet.onerror = () => console.error("Spritesheet de coin no se pudo cargar.");
 
         if (grande === true) {
-            this.spritesheet.src = "/img/sprites/BigCoin.png";
+            this.spritesheet.src = "./img/sprites/BigCoin.png";
         } else {
-            this.spritesheet.src = "/img/sprites/Coin.png";
+            this.spritesheet.src = "./img/sprites/Coin.png";
         }
     }
 

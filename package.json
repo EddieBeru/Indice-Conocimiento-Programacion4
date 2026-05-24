@@ -7,11 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npx esbuild public/game/main.js --bundle --outfile=public/game/bundle.js && npx esbuild public/game-dom/main.js --bundle --outfile=public/game-dom/bundle.js && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^6.1.5"
+  },
+  "devDependencies": {
+    "astro-relative-links": "^0.4.2"
   }
 }

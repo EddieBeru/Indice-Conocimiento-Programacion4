@@ -1,27 +1,18 @@
 import { Pacman } from "./entities/pacman.js";
 import { Fantasma } from "./entities/fantasma.js";
 import { Map, coins } from "./map.js";
-import { clearCanvas, getPlayerPoints, resetPoints } from "./engine.js";
+import { getPlayerPoints, resetPoints } from "./engine.js";
 import { addTick } from "./main.js";
 
-const canvas = document.getElementById("game-canvas");
 const scoreEl = document.getElementById("game-score");
 
 export class Game {
   constructor() {
-    this.map = new Map();
-    this.pacman = new Pacman(13, 20);
-    this.fantasmas = [
-      new Fantasma(12, 13, "red"),
-      new Fantasma(13, 13, "blue"),
-      new Fantasma(14, 13, "orange"),
-      new Fantasma(13, 10, "yellow"),
-    ];
+    this.boardEl = document.getElementById("game-board");
     this.isStarted = false;
-    this.isWon = false;
 
-    // Inicializar el canvas como borroso
-    canvas.classList.add("blurred");
+    // Inicializar el tablero por primera vez
+    this.reset();
 
     // Conectar botón de jugar/reintentar
     const playButton = document.getElementById("play-button");
@@ -33,31 +24,41 @@ export class Game {
           this.isStarted = true;
           const overlay = document.getElementById("game-overlay");
           if (overlay) overlay.classList.add("hidden");
-          canvas.classList.remove("blurred");
+          this.boardEl.classList.remove("blurred");
         } else {
           // Si es el inicio, solo empezar
           this.isStarted = true;
           const overlay = document.getElementById("game-overlay");
           if (overlay) overlay.classList.add("hidden");
-          canvas.classList.remove("blurred");
+          this.boardEl.classList.remove("blurred");
         }
       });
     }
   }
 
   reset() {
-    this.map = new Map();
+    this.boardEl.innerHTML = ""; // Vaciar todo el HTML viejo (paredes, monedas, entidades)
+    
+    // Crear mapa y renderizar paredes/monedas en el DOM
+    this.map = new Map(this.boardEl);
+
+    // Crear y añadir a Pacman
     this.pacman = new Pacman(13, 20);
+    this.boardEl.appendChild(this.pacman.element);
+
+    // Crear y añadir fantasmas
     this.fantasmas = [
       new Fantasma(12, 13, "red"),
       new Fantasma(13, 13, "blue"),
       new Fantasma(14, 13, "orange"),
       new Fantasma(13, 10, "yellow"),
     ];
+    this.fantasmas.forEach(f => this.boardEl.appendChild(f.element));
+
     resetPoints();
     this.isStarted = false;
     this.isWon = false;
-    canvas.classList.add("blurred");
+    this.boardEl.classList.add("blurred");
 
     // Reiniciar estilos del overlay por si viene de una victoria
     const overlayTitle = document.getElementById("overlay-title");
@@ -86,7 +87,7 @@ export class Game {
     if (this.pacman.isDying) return;
 
     this.pacman.update(this.map, this.fantasmas);
-
+    
     // Check win condition
     if (coins.length === 0) {
       this.isWon = true;
@@ -110,7 +111,7 @@ export class Game {
       }
       if (playButton) playButton.textContent = "TRY AGAIN";
       overlay.classList.remove("hidden");
-      canvas.classList.add("blurred");
+      this.boardEl.classList.add("blurred");
     }
   }
 
@@ -126,13 +127,15 @@ export class Game {
       }
       if (playButton) playButton.textContent = "PLAY AGAIN";
       overlay.classList.remove("hidden");
-      canvas.classList.add("blurred");
+      this.boardEl.classList.add("blurred");
     }
   }
 
   render() {
-    // Actualizar marcador siempre
-    scoreEl.textContent = getPlayerPoints();
+    // Actualizar marcador
+    if (scoreEl) {
+      scoreEl.textContent = getPlayerPoints();
+    }
 
     if (this.isWon) {
       this.mostrarOverlayVictoria();
@@ -145,19 +148,16 @@ export class Game {
       return;
     }
 
-    clearCanvas(canvas);
-
-    // Siempre dibujar el mapa y las monedas
-    this.map.dibujar();
-    coins.forEach(coin => coin.render());
-
     if (this.pacman.isDying) {
-      // Durante la muerte: solo animación de pacman, fantasmas estáticos
+      // Durante la muerte: animación de muerte de Pacman, fantasmas estáticos
       this.pacman.updateDeath();
     } else {
-      // Juego normal (o estado inicial pausado)
+      // Juego normal
       this.pacman.render();
       this.fantasmas.forEach(f => f.render());
     }
+
+    // Dibujar monedas en cada render frame (para animaciones)
+    coins.forEach(coin => coin.render());
   }
 }

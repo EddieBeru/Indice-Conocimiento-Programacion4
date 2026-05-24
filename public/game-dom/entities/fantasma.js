@@ -1,52 +1,28 @@
 import Entity from "./entity.js";
-import { ctx, TILE, ACTUAL_TICK, COLS, ROWS } from "../main.js";
+import { ACTUAL_TICK, COLS, ROWS } from "../main.js";
 import { addPoints } from "../engine.js";
-
-const SPRITE_SIZE = 16; // El tamaño real de cada sprite en la imagen
 
 export class Fantasma extends Entity {
     constructor(x, y, color) {
-        super(x, y);
-        this.spritesheet = new Image();
-        this.spritesheet.onerror = () => console.error("Spritesheet de fantasma no se pudo cargar.");
+        super(x, y, `ghost ghost-${color}`);
         this.color = color;
 
         // Propiedades de estado para pellets grandes (Power Pellets)
         this.state = "normal"; // "normal", "scared", "dead"
         this.scaredTimer = 0;
-        this.scaredSpritesheet = new Image();
-        this.scaredSpritesheet.src = "./img/sprites/greenGhost.png";
-        this.scaredSpritesheet.onerror = () => console.error("Spritesheet de fantasma asustado no se pudo cargar.");
-
-        switch (color) {
-            case "red":
-                this.spritesheet.src = "./img/sprites/redGhost.png";
-                break;
-            case "yellow":
-                this.spritesheet.src = "./img/sprites/yellowGhost.png";
-                break;
-            case "blue":
-                this.spritesheet.src = "./img/sprites/blueGhost.png";
-                break;
-            case "orange":
-                this.spritesheet.src = "./img/sprites/orangeGhost.png";
-                break;
-            default:
-                this.spritesheet.src = "./img/sprites/redGhost.png";
-        }
     }
 
     asustar() {
         if (this.state === "dead") return;
         this.state = "scared";
-        this.scaredTimer = 360; // 6 segundos a 60 FPS
+        this.scaredTimer = 360; // 12 segundos a 30 FPS / 6 segundos a 60 FPS
     }
 
     manejarColision(pacman) {
         if (this.state === "scared") {
             this.state = "dead";
             addPoints(200); // 200 puntos por comer un fantasma asustado
-            console.log("Pacman se comió al fantasma asustado: " + this.color);
+            console.log("Pacman se comió al fantasma asustado en DOM: " + this.color);
         } else if (this.state === "normal") {
             pacman.morir();
         }
@@ -166,32 +142,23 @@ export class Fantasma extends Entity {
 
     render() {
         this.updateSlide();
-        const currentFrame = Math.floor((ACTUAL_TICK + this.randomInt) / (this.randomInt % 4 + 1)) % 8;
 
-        let activeSheet = this.spritesheet;
-        if (this.state === "scared") {
-            activeSheet = this.scaredSpritesheet;
+        // Sincronizar clases DOM según el estado actual
+        if (this.element) {
+            if (this.state === "scared") {
+                this.element.classList.add("scared");
+                this.element.classList.remove("dead");
+            } else if (this.state === "dead") {
+                this.element.classList.add("dead");
+                this.element.classList.remove("scared");
+            } else {
+                this.element.classList.remove("scared", "dead");
+            }
         }
 
-        if (!activeSheet.complete) return;
-
-        if (this.state === "dead") {
-            // Dibujar como un alma/ojos translúcidos en escala de grises
-            ctx.save();
-            ctx.globalAlpha = 0.35;
-            ctx.filter = "grayscale(100%) brightness(1.5)";
-            ctx.drawImage(
-                activeSheet,
-                currentFrame * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE,
-                this.rx * TILE, this.ry * TILE, TILE, TILE
-            );
-            ctx.restore();
-        } else {
-            ctx.drawImage(
-                activeSheet,
-                currentFrame * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE,
-                this.rx * TILE, this.ry * TILE, TILE, TILE
-            );
+        const currentFrame = Math.floor((ACTUAL_TICK + this.randomInt) / (this.randomInt % 4 + 1)) % 8;
+        if (this.sprite) {
+            this.sprite.style.backgroundPosition = `-${currentFrame * 16}px 0px`;
         }
     }
 
@@ -214,13 +181,6 @@ export class Fantasma extends Entity {
         }
     }
 
-    /**
-     * Inky (azul): calcula un objetivo basado en Blinky y Pacman.
-     * 1. Encuentra la casilla 2 espacios delante de Pacman.
-     * 2. Traza un vector desde Blinky hasta esa casilla.
-     * 3. Duplica ese vector para obtener el objetivo final.
-     * 4. Busca camino hacia ese objetivo (o el walkable más cercano).
-     */
     perseguirInky(map, directions, pacman, fantasmas) {
         // Buscar a Blinky (fantasma rojo)
         const blinky = fantasmas.find(f => f.color === "red");
@@ -290,10 +250,6 @@ export class Fantasma extends Entity {
         }
     }
 
-    /**
-     * Machibuse (amarillo): embosca a Pacman apuntando 4 casillas adelante de su dirección.
-     * Esto le ayuda a Blinky (red) a acorralar a Pacman desde dos lados opuestos.
-     */
     perseguirMachibuse(map, directions, pacman) {
         // Apuntar 4 casillas adelante de la dirección actual de Pacman
         let targetX = pacman.x + pacman.dir.x * 4;
@@ -348,10 +304,6 @@ export class Fantasma extends Entity {
         }
     }
 
-    /**
-     * Navegación siguiendo la pared izquierda (Left-Hand Rule)
-     * lo cual causa que rodee obstáculos en sentido antihorario (counterclockwise).
-     */
     rodearObstaculos(map, directions) {
         if (directions.length === 0) return;
 
@@ -361,7 +313,6 @@ export class Fantasma extends Entity {
         }
 
         // Direcciones relativas para giro antihorario en pantalla (y va hacia abajo):
-        // Giro de 90° CCW (izquierda): x' = y, y' = -x
         const dirIzquierda = { x: this.dir.y, y: -this.dir.x };
         const dirRecto = { x: this.dir.x, y: this.dir.y };
         const dirDerecha = { x: -this.dir.y, y: this.dir.x };
@@ -401,5 +352,4 @@ export class Fantasma extends Entity {
         this.dir = nextDir;
         this.startSlide(this.x + nextDir.x, this.y + nextDir.y, 500);
     }
-
 }

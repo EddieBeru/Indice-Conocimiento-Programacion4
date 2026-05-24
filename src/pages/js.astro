@@ -1,0 +1,267 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/navbar.astro";
+---
+
+<Layout title="JavaScript - Eventos">
+    <Navbar />
+    <main class="title-banner">
+        <h1>JavaScript: Eventos del DOM</h1>
+        <p class="mb-0">
+            Los eventos son acciones o sucesos que ocurren en la página web, a
+            los cuales JavaScript puede reaccionar para crear interactividad.
+        </p>
+    </main>
+
+    <section class="content pb-5">
+        <div class="card bg-dark-subtle border-secondary-subtle mb-3">
+            <div class="card-body">
+                <h2 class="h4 mb-3">¿Para qué sirven los eventos?</h2>
+                <p class="mb-0">
+                    Permiten ejecutar código JavaScript en respuesta a la
+                    interacción del usuario o a cambios en el navegador, como
+                    hacer clic en un botón, escribir en un campo o redimensionar
+                    la ventana.
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion" id="accordionJsEvents">
+            <!-- Eventos de Ratón -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#jsMouse"
+                        aria-expanded="true"
+                        aria-controls="jsMouse"
+                    >
+                        Eventos de Ratón (Mouse Events)
+                    </button>
+                </h2>
+                <div
+                    id="jsMouse"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#accordionJsEvents"
+                >
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">click</h3>
+                                    <p class="mb-0">Se dispara cuando el usuario presiona y suelta el botón principal del ratón sobre un elemento.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">dblclick</h3>
+                                    <p class="mb-0">Ocurre al hacer doble clic rápido sobre un elemento. Útil para acciones secundarias o de edición rápida.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mousedown</h3>
+                                    <p class="mb-0">Se activa en el momento exacto en que se presiona un botón del ratón (antes de soltarlo).</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mouseup</h3>
+                                    <p class="mb-0">Se dispara al soltar el botón del ratón tras haberlo presionado.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mousemove</h3>
+                                    <p class="mb-0">Ocurre continuamente mientras el cursor del ratón se mueve dentro del área de un elemento. Se usa mucho para mecánicas de "arrastrar y soltar".</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mouseenter</h3>
+                                    <p class="mb-0">Se activa una sola vez cuando el cursor entra en el área de un elemento. No se propaga (no burbujea) a elementos padres.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mouseleave</h3>
+                                    <p class="mb-0">Se dispara al sacar el cursor del área del elemento, sin propagarse hacia arriba en el DOM.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mouseover</h3>
+                                    <p class="mb-0">Similar a mouseenter, pero sí se propaga. Esto significa que también se dispara si el cursor entra en elementos hijos dentro del contenedor.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">mouseout</h3>
+                                    <p class="mb-0">Se activa al sacar el cursor del elemento, propagándose a través del DOM.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">contextmenu</h3>
+                                    <p class="mb-0">Ocurre cuando se solicita el menú contextual, normalmente al hacer clic derecho. Sirve para crear menús propios personalizados o bloquear el de defecto.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos de Teclado -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#jsKeyboard"
+                        aria-expanded="false"
+                        aria-controls="jsKeyboard"
+                    >
+                        Eventos de Teclado (Keyboard Events)
+                    </button>
+                </h2>
+                <div
+                    id="jsKeyboard"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionJsEvents"
+                >
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">keydown</h3>
+                                    <p class="mb-0">Se dispara en el instante en que el usuario presiona cualquier tecla. Si se mantiene pulsada, el evento se repite constantemente.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">keyup</h3>
+                                    <p class="mb-0">Ocurre cuando el usuario suelta la tecla que había presionado. Muy usado para validaciones o búsquedas en tiempo real mientras se escribe.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos de Formulario -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#jsForms"
+                        aria-expanded="false"
+                        aria-controls="jsForms"
+                    >
+                        Eventos de Formulario y Estado
+                    </button>
+                </h2>
+                <div
+                    id="jsForms"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionJsEvents"
+                >
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">focus</h3>
+                                    <p class="mb-0">Se dispara cuando un elemento (como un input de texto o un botón) recibe el foco, ya sea al hacerle clic o navegar con el tabulador.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">blur</h3>
+                                    <p class="mb-0">Ocurre cuando un elemento pierde el foco (el usuario hace clic o navega a otro lado). Útil para validar un campo justo después de que el usuario termina de llenarlo.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">change</h3>
+                                    <p class="mb-0">Se activa cuando el valor de un elemento (input, select, textarea) se modifica y este pierde el foco, o al seleccionar instantáneamente una opción diferente en un menú desplegable.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">select</h3>
+                                    <p class="mb-0">Se dispara cuando el usuario resalta o selecciona un fragmento de texto dentro de un campo de entrada (input de texto o textarea).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eventos de Ventana y Documento -->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button collapsed"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#jsWindow"
+                        aria-expanded="false"
+                        aria-controls="jsWindow"
+                    >
+                        Eventos de Ventana y Ciclo de Vida
+                    </button>
+                </h2>
+                <div
+                    id="jsWindow"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#accordionJsEvents"
+                >
+                    <div class="accordion-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">DOMContentLoaded</h3>
+                                    <p class="mb-0">Se dispara en el objeto <code>document</code> apenas la estructura HTML inicial ha sido cargada y analizada, sin esperar a imágenes u hojas de estilo. Es el momento ideal para inicializar lógica de JS.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">load</h3>
+                                    <p class="mb-0">Se dispara en la ventana (<code>window</code>) cuando la página entera ha cargado por completo, incluyendo todos los recursos pesados como imágenes y scripts externos.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">resize</h3>
+                                    <p class="mb-0">Ocurre cada vez que cambia el tamaño de la ventana del navegador. Útil para recalcular componentes dinámicos en interfaces responsivas.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">scroll</h3>
+                                    <p class="mb-0">Se dispara de forma continua al desplazar la barra de desplazamiento (hacer scroll) en la página o dentro de un elemento específico.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">beforeunload</h3>
+                                    <p class="mb-0">Sucede justo antes de que el usuario abandone la página (al cerrar la pestaña, recargar o cambiar de sitio). Es muy usado para lanzar advertencias de "Tiene cambios sin guardar".</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded bg-body-tertiary h-100">
+                                    <h3 class="h6">unload</h3>
+                                    <p class="mb-0">Se ejecuta cuando la página ya se está destruyendo. Se usaba para limpiar recursos o enviar analíticas de salida al servidor en el último momento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

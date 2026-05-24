@@ -14,19 +14,25 @@
 html {
     background-color: var(--background-color);
     scroll-behavior: smooth;
+    font-size: 18px;
 }
 
 body {
+    background-image: url("../img/gatoAsustado.jpg");
     background-color: transparent;
     min-height: 100dvh;
     overflow-y: auto;
     color: var(--text-color);
 }
 
-.knewave-regular {
-  font-family: "Knewave", system-ui;
-  font-weight: 400;
-  font-style: normal;
+* {
+    font-family: "Caveat Brush";
+    font-weight: 300;
+    font-style: normal;
+}
+
+code {
+    font-family: "Caveat Brush";
 }
 
 .title-banner {
@@ -36,7 +42,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(45deg, #1f2a36, #27384a);
+    background: linear-gradient(180deg, #1b8477, #502e76);
     margin: 16px;
     padding: 1rem;
     border-radius: 16px;
@@ -59,4 +65,33 @@ section.content {
 
 .accordion-button:focus {
     box-shadow: none;
+}
+
+img.grafico-card {
+    position: absolute;
+    opacity: 0.4;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    animation-name: wobble;
+    animation-timing-function: ease-in-out;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotate(20deg);
+    }
+
+    100% {
+        transform: rotate(-20deg);
+    }
+}
+
+.card {
+    backdrop-filter: url(#pixelate);
+    background-color:
+        color-mix(in srgb, var(--bs-dark-bg-subtle) 50%, transparent) !important;
 }

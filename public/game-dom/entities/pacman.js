@@ -1,17 +1,12 @@
 import Entity from "./entity.js";
 import { getInputDir, addPoints } from "../engine.js";
-import { ctx, TILE, ACTUAL_TICK } from "../main.js";
-
-const spritesheet = new Image();
-spritesheet.src = "./img/sprites/PacMan.png";
-spritesheet.onerror = () => console.error("Spritesheet de pacman no se pudo cargar.");
-const SPRITE_SIZE = 16; // El tamaño real de cada sprite en la imagen
+import { ACTUAL_TICK } from "../main.js";
 
 const DEATH_DURATION = 45; // ticks que dura la animación de muerte
 
 export class Pacman extends Entity {
     constructor(x, y) {
-        super(x, y);
+        super(x, y, "pacman");
         this.lastInputDir = { x: 0, y: 0 };
         this.deathTick = 0;   // tick en que empezó la muerte
         this.isDead = false;   // true cuando la animación terminó
@@ -34,12 +29,10 @@ export class Pacman extends Entity {
         }
 
         const inputDir = getInputDir();
-        if (!inputDir) {
-            return;
-        }
-
-        if (inputDir !== this.lastInputDir && map.isWalkable(this.x + inputDir.x, this.y + inputDir.y)) {
-            this.lastInputDir = inputDir;
+        if (inputDir) {
+            if (inputDir !== this.lastInputDir && map.isWalkable(this.x + inputDir.x, this.y + inputDir.y)) {
+                this.lastInputDir = inputDir;
+            }
         }
 
         // Si tiene el powerup activo, la velocidad aumenta (duración de slide de 300ms en vez de 500ms)
@@ -54,7 +47,7 @@ export class Pacman extends Entity {
         if (coin !== undefined) {
             if (coin.grande === true) {
                 addPoints(50); // Pellets grandes otorgan 50 puntos
-                this.powerupTimer = 360; // 6 segundos a 60 FPS
+                this.powerupTimer = 360; // 12 segundos a 30 FPS / 6 segundos a 60 FPS
                 // Asustar a todos los fantasmas que no estén muertos
                 fantasmas.forEach(f => f.asustar());
             } else {
@@ -70,12 +63,20 @@ export class Pacman extends Entity {
         this.updateSlide();
         const currentFrame = Math.floor(ACTUAL_TICK / 2) % 8;
 
-        if (!spritesheet.complete) return;
+        if (this.sprite) {
+            this.sprite.style.backgroundPosition = `-${currentFrame * 16}px 0px`;
 
-        ctx.drawImage(
-            spritesheet,
-            currentFrame * SPRITE_SIZE, 0, SPRITE_SIZE, SPRITE_SIZE,
-            this.rx * TILE, this.ry * TILE, TILE, TILE);
+            // Aplicar rotación y espejo al sprite
+            let angle = 0;
+            let scaleY = 1;
+            if (this.dir.x === 1) {
+                angle = 0;
+            } else if (this.dir.x === -1) {
+                angle = 180;
+                scaleY = -1;
+            }
+            this.sprite.style.transform = `rotate(${angle}deg) scaleY(${scaleY})`;
+        }
     }
 
     morir() {
@@ -83,7 +84,10 @@ export class Pacman extends Entity {
         this.isDying = true;
         this.isSliding = false;
         this.deathTick = 0;
-        console.log("Pacman murio");
+        if (this.sprite) {
+            this.sprite.classList.add("dying");
+        }
+        console.log("Pacman murio en el DOM");
     }
 
     /**
@@ -95,35 +99,14 @@ export class Pacman extends Entity {
 
         this.deathTick++;
 
-        // Progreso de 0 a 1
         const progress = Math.min(1, this.deathTick / DEATH_DURATION);
-
-        // Centro del pacman en píxeles
-        const cx = this.rx * TILE + TILE / 2;
-        const cy = this.ry * TILE + TILE / 2;
-        const radius = TILE / 2;
-
-        // La "boca" se abre desde abajo hasta que desaparece
-        // startAngle va de (0.5π + pequeño) hasta 2π (desaparece)
-        // endAngle va de (0.5π - pequeño) hasta 0
-        const mouthAngle = progress * Math.PI; // 0 → π
-
-        const startAngle = Math.PI * 0.5 + mouthAngle;
-        const endAngle = Math.PI * 0.5 - mouthAngle;
-
-        // Cuando mouthAngle llega a π, el arco se cierra y desaparece
-        if (progress < 1) {
-            ctx.fillStyle = "#FFD700";
-            ctx.beginPath();
-            ctx.moveTo(cx, cy);
-            ctx.arc(cx, cy, radius, startAngle, endAngle, false);
-            ctx.closePath();
-            ctx.fill();
-        }
 
         if (progress >= 1) {
             this.isDead = true;
             this.isDying = false;
+            if (this.element) {
+                this.element.style.display = "none"; // ocultar elemento al terminar
+            }
             return false;
         }
 
