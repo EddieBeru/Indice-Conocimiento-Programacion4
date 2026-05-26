@@ -10,7 +10,7 @@ const getAriaCurrent = (path: string) =>
   class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle"
 >
   <div class="container">
-    <a class="navbar-brand fw-semibold" href="/index.html">Programación 4</a>
+    <a class="navbar-brand fw-semibold" href="index.html">Programación 4</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -29,42 +29,42 @@ const getAriaCurrent = (path: string) =>
           <a
             class={getNavLinkClass("/index.html")}
             aria-current={getAriaCurrent("/index.html")}
-            href="/index.html">Inicio</a
+            href="index.html">Inicio</a
           >
         </li>
         <li class="nav-item">
           <a
             class={getNavLinkClass("/internet-web.html")}
             aria-current={getAriaCurrent("/internet-web.html")}
-            href="/internet-web.html">Internet y Web</a
+            href="internet-web.html">Internet y Web</a
           >
         </li>
         <li class="nav-item">
           <a
             class={getNavLinkClass("/html.html")}
             aria-current={getAriaCurrent("/html.html")}
-            href="/html.html">HTML</a
+            href="html.html">HTML</a
           >
         </li>
         <li class="nav-item">
           <a
             class={getNavLinkClass("/css.html")}
             aria-current={getAriaCurrent("/css.html")}
-            href="/css.html">CSS</a
+            href="css.html">CSS</a
           >
         </li>
         <li class="nav-item">
           <a
             class={getNavLinkClass("/backend.html")}
             aria-current={getAriaCurrent("/backend.html")}
-            href="/backend.html">Backend</a
+            href="backend.html">Backend</a
           >
         </li>
         <li class="nav-item">
           <a
             class={getNavLinkClass("/js.html")}
             aria-current={getAriaCurrent("/js.html")}
-            href="/js.html">JavaScript</a
+            href="js.html">JavaScript</a
           >
         </li>
         <li class="nav-item dropdown">
@@ -82,8 +82,10 @@ const getAriaCurrent = (path: string) =>
             class="dropdown-menu dropdown-menu-dark animate slideIn"
             aria-labelledby="navbarDropdown"
           >
-            <li><a class="dropdown-item" href="/game.html">Canvas Clásico</a></li>
-            <li><a class="dropdown-item" href="/game-dom.html">DOM Puro</a></li>
+            <li>
+              <a class="dropdown-item" href="game.html">Canvas Clásico</a>
+            </li>
+            <li><a class="dropdown-item" href="game-dom.html">DOM Puro</a></li>
           </ul>
         </li>
       </ul>
