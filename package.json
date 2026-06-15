@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npx esbuild public/game/main.js --bundle --outfile=public/game/bundle.js && npx esbuild public/game-dom/main.js --bundle --outfile=public/game-dom/bundle.js && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
